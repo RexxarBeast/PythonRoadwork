@@ -13,21 +13,26 @@ connection.commit()
 
 def logo():
     for attempt in range(5):
-        try:
-            user_input = input("enter your username ")
-            pass_input = input("enter ur password ")
-         
-            cursor.execute('SELECT * FROM users WHERE username = ? AND password = ?', (username, password))
-            user = cursor.fetchone()
-        except ValueError:
-            print("invalid type of login")
+      
+        username = input("Enter your username: ")
+        password = input("Enter your password: ")
+
+        cursor.execute(
+            "SELECT * FROM users WHERE username = ? AND password = ?",
+            (username, password),
+        )
+        user = cursor.fetchone()
 
         if user:
-            print("successfully login ")
+            print("Successfully logged in")
             return True
-        else:
-            print(f"too many attempts{4-attempt}")
-            return False
+
+        remaining = 4 - attempt
+        if remaining > 0:
+            print(f"Wrong username or password. {remaining} attempts left.")
+
+    print("Too many attempts.")
+    return False
 while True:
     if logo():
         print("welcome")
