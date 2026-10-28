@@ -1,23 +1,28 @@
 import sqlite3
 
-connection = sqlite3.connect("sample.db")
+connection = sqlite3.connect("asdas.db")
 cursor = connection.cursor()
+# cursor.execute(
+#     "CREATE TABLE users (id INTEGER PRIMARY KEY, username TEXT NOT NULL, password TEXT NOT NULL)"
+# )
 cursor.execute(
-    "CREATE TABLE users (id INTEGER PRIMARY KEY, name TEXT)"
+    "INSERT INTO users (username, password) VALUES (?, ?)",
+    ("nando", "123"),
 )
 connection.commit()
-username = 'nando'
-password = '123'
 
 def logo():
     for attempt in range(5):
         try:
             user_input = input("enter your username ")
             pass_input = input("enter ur password ")
+         
+            cursor.execute('SELECT * FROM users WHERE username = ? AND password = ?', (username, password))
+            user = cursor.fetchone()
         except ValueError:
             print("invalid type of login")
 
-        if user_input == username and pass_input == password:
+        if user:
             print("successfully login ")
             return True
         else:
