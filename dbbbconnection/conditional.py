@@ -5,16 +5,17 @@ cursor = connection.cursor()
 # cursor.execute(
 #     "CREATE TABLE users (id INTEGER PRIMARY KEY, username TEXT NOT NULL, password TEXT NOT NULL)"
 # )
-cursor.execute(
-    "INSERT INTO users (username, password) VALUES (?, ?)",
-    ("nando", "123"),
-)
+# cursor.execute(
+#     "INSERT INTO users (username, password) VALUES (?, ?)",
+#     ("nando", "123"),
+# )
 connection.commit()
 
 def logo():
     for attempt in range(5):
       
         username = input("Enter your username: ")
+
         password = input("Enter your password: ")
 
         cursor.execute(
